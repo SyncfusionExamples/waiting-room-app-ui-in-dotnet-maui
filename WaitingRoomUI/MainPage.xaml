@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sfControl="clr-namespace:Syncfusion.Maui.Core;assembly=Syncfusion.Maui.Core"
+             xmlns:listView="clr-namespace:Syncfusion.Maui.ListView;assembly=Syncfusion.Maui.ListView"
+             BackgroundColor="White"
+             x:Class="WaitingRoomUI.MainPage">
+
+    <!-- Main layout-->
+    <VerticalStackLayout BackgroundColor="#e1eaf8"
+                          Margin="0,0,0,-65">
+
+        <!-- 1. Schedule header-->
+        <Border StrokeShape="RoundRectangle 0,0,25,25"
+                StrokeThickness="0"
+                BackgroundColor="White">
+
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                  ColumnDefinitions="Auto,*"
+                  Padding="30">
+                
+              <!-- Avatarview-->
+               <sfControl:SfAvatarView Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" 
+                        ContentType="Custom"
+                        ImageSource="model.jpeg"
+                        VerticalOptions="Start" 
+                        Stroke="Transparent"
+                        HorizontalOptions="Start" 
+                        WidthRequest="60"
+                        HeightRequest="60"
+                        CornerRadius="30"/> 
+                <!-- Name & role-->
+                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalTextAlignment="Center" Text="Dr. Brooklyn Simmons" TextColor="Black" FontSize="21"/>
+                <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalTextAlignment="Center"  Text="Family Medicine, Primary Care" FontSize="15" TextColor="Silver" Margin="0,0,0,35"/>
+                <!-- Description & minutes -->
+                <Label Grid.Column="0" Grid.Row="2" Text="Estimated waiting time:" TextColor="Black"/>
+                <Label Grid.Column="0" Grid.Row="3" Text="~16 minutes" TextColor="#224785"/>
+                <!-- Get help button-->
+                <Button Grid.Column="1" Grid.Row="2" Grid.RowSpan="3"  WidthRequest="120" HorizontalOptions="End" Text="Get help" BackgroundColor="Transparent" TextColor="Black" CornerRadius="10" BorderWidth="1" VerticalOptions="Center" BorderColor="#cddefa" Margin="10,0,0,0"/>
+            </Grid> 
+        </Border>
+         
+        
+        <listView:SfListView
+                       ItemsSource="{Binding Schedule}"
+                       ItemSize="215" 
+                       ScrollBarVisibility="Never">
+          <listView:SfListView.ItemTemplate>
+            <DataTemplate>
+                 <Grid ColumnDefinitions="Auto,*"
+                       RowDefinitions="Auto,Auto,*,Auto,Auto,Auto"
+                       Padding="15,20,20,0">
+
+                     <!-- Time-->
+                     <Label Grid.Row="0" Grid.Column="1" Text="{Binding Time}" TextColor="#1b4485" Margin="10,0,0,5"/>
+                     <!--Avatar-->
+                     <sfControl:SfAvatarView Grid.Column="0" Grid.Row="1"   
+                                ContentType="Default" 
+                                VerticalOptions="Start" 
+                                Stroke="Transparent"
+                                BackgroundColor="White"
+                                HorizontalOptions="Start" 
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                CornerRadius="20"/>
+                     <!--Line-->
+                     <BoxView Grid.Column="0" Grid.Row="2" Grid.RowSpan="2" Opacity="0.3" HorizontalOptions="FillAndExpand" WidthRequest="1" Color="#1690F4"/>
+
+                      <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="2"
+                              Margin="10,0,0,0"
+                              StrokeShape="RoundRectangle 15"
+                              StrokeThickness="0"
+                              BackgroundColor="White"
+                              HeightRequest="170">
+                         <VerticalStackLayout Padding="15" Spacing="10">
+                             <!--Minutes-->
+                             <Label>
+                                 <Label.FormattedText>
+                                     <FormattedString>
+                                         <Span Text="Updated estimated waiting time:&#10;" FontSize="15"/>
+                                         <Span Text="{Binding Minutes, StringFormat='~{0} minutes.'}" FontSize="14" />
+                                     </FormattedString> 
+                                 </Label.FormattedText> 
+                             </Label>
+                             <!-- Description-->
+                             <Label Text="{Binding Description}" TextColor="#636c7a" />
+                             <Button Text="Play Basketball" BackgroundColor="#e0ecff" IsEnabled="True" IsVisible="{Binding PlayBasket}" CornerRadius="20" TextColor="#1b4485"/>
+                         </VerticalStackLayout> 
+                      </Border>
+                 </Grid>
+                </DataTemplate>
+            </listView:SfListView.ItemTemplate>
+        </listView:SfListView>
+
+          
+
+    </VerticalStackLayout>
+
+</ContentPage>
+
